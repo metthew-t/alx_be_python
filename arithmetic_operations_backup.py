@@ -1,7 +1,6 @@
 def perform_operation(num1, num2, operation):
-    operation = operation.lower()
-
-
+    operation = operation.lower().strip()
+    
     if operation == 'add':
         return num1 + num2
     elif operation == 'subtract':
@@ -11,6 +10,7 @@ def perform_operation(num1, num2, operation):
     elif operation == 'divide':
         if num2 == 0:
             return "Error: Division by zero is not allowed"
-        return num1 / num2
+        else:
+            return num1 / num2
     else:
-        return "Error:Invalid operation"
+        return "Error: Invalid operation"
