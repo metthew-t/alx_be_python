@@ -1,28 +1,22 @@
 import sys
-from bank_account import BankAccount
+import sys
+from robust_division_calculator import safe_divide
 
 def main():
-    account = BankAccount(100)  # Example starting balance
-    if len(sys.argv) < 2:
-        print("Usage: python main.py <command>:<amount>")
-        print("Commands: deposit, withdraw, display")
+    # Check if exactly 2 arguments are provided (plus script name)
+    if len(sys.argv) != 3:
+        print("Usage: python main.py <numerator> <denominator>")
+        print("Example: python main.py 10 5")
+        print("Example: python main.py 7.5 2")
         sys.exit(1)
 
-    command, *params = sys.argv[1].split(':')
-    amount = float(params[0]) if params else None
+    # Get command line arguments
+    numerator = sys.argv[1]
+    denominator = sys.argv[2]
 
-    if command == "deposit" and amount is not None:
-        account.deposit(amount)
-        print(f"Deposited: ${amount}")
-    elif command == "withdraw" and amount is not None:
-        if account.withdraw(amount):
-            print(f"Withdrew: ${amount}")
-        else:
-            print("Insufficient funds.")
-    elif command == "display":
-        account.display_balance()
-    else:
-        print("Invalid command.")
+    # Perform safe division
+    result = safe_divide(numerator, denominator)
+    print(result)
 
 if __name__ == "__main__":
     main()
